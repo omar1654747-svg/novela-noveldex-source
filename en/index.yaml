@@ -1,5 +1,5 @@
 sources:
-  - id: "noveldex"
-    name: "NovelDex"
+  - id: "the_novels_extra"
+    name: "The Novel’s Extra"
     lang: "en"
-    url: "https://raw.githubusercontent.com/REPLACE_OWNER/novela-noveldex-source/main/en/noveldex.lua"
+    url: "https://raw.githubusercontent.com/omar1654747-svg/novela-noveldex-source/main/en/the_novels_extra.lua"

@@ -1,5 +1,5 @@
-id       = "noveldex"
-name     = "NovelDex"
+id       = "the_novels_extra"
+name     = "The Novel’s Extra"
 version  = "1.0.0"
 baseUrl  = "https://noveldex.io"
 language = "en"
@@ -12,6 +12,7 @@ local BROWSER_HEADERS = {
 }
 local _pageCache = {}
 local _seriesIdCache = {}
+local FIXED_BOOK_URL = baseUrl .. "/series/novel/the-novels-extra"
 
 local function absUrl(href)
   if not href or href == "" then return "" end
@@ -86,20 +87,27 @@ local function parseCards(body)
   return items
 end
 
+local function fixedBookItem()
+  local title = getBookTitle(FIXED_BOOK_URL) or "The Novel’s Extra"
+  return {
+    title = title,
+    url = FIXED_BOOK_URL,
+    cover = getBookCoverImageUrl(FIXED_BOOK_URL) or "",
+  }
+end
+
 function getCatalogList(index)
-  index = index or 0
-  local page = index + 1
-  local url = baseUrl .. "/series?sort=newest"
-  if page > 1 then url = url .. "&page=" .. tostring(page) end
-  local body = fetch(url)
-  local items = body and parseCards(body) or {}
-  return { items = items, hasNext = #items > 0 }
+  if (index or 0) > 0 then return { items = {}, hasNext = false } end
+  return { items = { fixedBookItem() }, hasNext = false }
 end
 
 function getCatalogSearch(index, query)
   if (index or 0) > 0 then return { items = {}, hasNext = false } end
-  local body = fetch(baseUrl .. "/series?q=" .. url_encode(query or ""))
-  return { items = body and parseCards(body) or {}, hasNext = false }
+  local q = string_clean(query or "")
+  if q == "" or string.find(string_clean("The Novel’s Extra"), q, 1, true) or string.find(string_clean("The Novels Extra"), q, 1, true) then
+    return { items = { fixedBookItem() }, hasNext = false }
+  end
+  return { items = {}, hasNext = false }
 end
 
 function getBookTitle(bookUrl)
@@ -203,7 +211,6 @@ function getChapterText(html, url)
   local seriesId = getSeriesId(baseUrl .. "/series/novel/" .. slug)
   if not seriesId then return "" end
   local previous = tonumber(number) - 1
-  if previous < 0 then previous = 0 end
   local endpoint = baseUrl .. "/api/chapters/next?seriesId=" .. url_encode(seriesId)
       .. "&afterNumber=" .. tostring(previous) .. "&limit=1"
   local body = fetch(endpoint)
