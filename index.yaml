@@ -1,4 +1,8 @@
+version: "1.0.0"
+lastUpdated: "2026-10-08"
+totalSources: 1
 languages:
   en:
     name: "English"
+    count: 1
     url: "https://raw.githubusercontent.com/omar1654747-svg/novela-noveldex-source/main/en/index.yaml"
