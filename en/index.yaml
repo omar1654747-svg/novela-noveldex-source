@@ -1,0 +1,5 @@
+sources:
+  - id: "noveldex"
+    name: "NovelDex"
+    lang: "en"
+    url: "https://raw.githubusercontent.com/REPLACE_OWNER/novela-noveldex-source/main/en/noveldex.lua"
