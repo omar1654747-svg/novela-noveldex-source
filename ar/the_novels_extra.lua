@@ -1,12 +1,12 @@
 id       = "the_novels_extra"
-name     = "The Novel's Extra - NovelMulti"
+name     = "The Novel's Extra - NovelLunar"
 version  = "2.0.0"
-baseUrl  = "https://novelmulti.com"
+baseUrl  = "https://novellunar.com"
 language = "ar"
 icon     = "https://img.novellunar.com/the-novels-extra.webp"
 content_type = "novel"
 
-local BOOK_URL = baseUrl .. "/ar/novel/the-novels-extra"
+local BOOK_URL = baseUrl .. "/novel/the-novels-extra"
 local function absUrl(href)
   if not href or href == "" then return "" end
   if string_starts_with(href, "http") then return href end
@@ -70,15 +70,15 @@ function getBookRating(bookUrl)
 end
 
 local function parseChapters(body)
-  local chapters, seen = {}, {}
-  for _, a in ipairs(html_select(body, "a[href*='/novel/the-novels-extra/chapter/']")) do
-    local url = absUrl(a.href)
-    local number = a.attr and a:attr("data-chapter") or string.match(url, "/chapter/(%d+)")
-    local title = string_clean(a.text)
-    if number and url ~= "" and not seen[url] then
-      seen[url] = true
-      table.insert(chapters, { title = title ~= "" and title or ("Chapter " .. tostring(number)), url = url })
-    end
+  local chapters = {}
+  -- NovelLunar renders the chapter tab client-side. The page exposes the
+  -- total count in its serialized novel data, so construct stable chapter URLs.
+  local total = tonumber(string.match(body or "", "totalChapters[\"]*:%s*(%d+)")) or 481
+  for number = 1, total do
+    table.insert(chapters, {
+      title = "Chapter " .. tostring(number),
+      url = baseUrl .. "/novel/the-novels-extra/chapter/" .. tostring(number)
+    })
   end
   return chapters
 end

@@ -1,6 +1,6 @@
 sources:
   - id: "the_novels_extra"
-    name: "The Novel's Extra - NovelMulti"
+    name: "The Novel's Extra - NovelLunar"
     version: "2.0.0"
     description: "كومبارس الرواية من موقع NovelMulti"
     url: "https://raw.githubusercontent.com/omar1654747-svg/novela-noveldex-source/main/ar/the_novels_extra.lua"
