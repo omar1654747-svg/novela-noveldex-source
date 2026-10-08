@@ -1,9 +1,0 @@
-sources:
-  - id: "the_novels_extra"
-    name: "The Novel’s Extra"
-    version: "1.0.0"
-    description: "The Novel’s Extra from NovelDex"
-    url: "https://raw.githubusercontent.com/omar1654747-svg/novela-noveldex-source/main/en/the_novels_extra.lua"
-    icon: "https://noveldex.io/series/novel/the-novels-extra/opengraph-image"
-    language: "en"
-    content_type: "novel"
