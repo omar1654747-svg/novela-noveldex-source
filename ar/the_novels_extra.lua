@@ -65,7 +65,7 @@ end
 
 function getBookRating(bookUrl)
   local body = fetchPage(bookUrl)
-  local text = body and string_match(body, "([0-9]+%.[0-9]+)") or nil
+  local text = body and string.match(body, "([0-9]+%.[0-9]+)") or nil
   return text
 end
 
