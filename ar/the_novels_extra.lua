@@ -1,6 +1,6 @@
 id       = "the_novels_extra"
 name     = "The Novel's Extra - NovelLunar"
-version  = "2.0.0"
+version  = "3.0.0"
 baseUrl  = "https://novellunar.com"
 language = "ar"
 icon     = "https://img.novellunar.com/the-novels-extra.webp"
